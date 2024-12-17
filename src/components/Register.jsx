@@ -1,12 +1,29 @@
+import { useContext } from "react";
+import { AuthContext } from "../providers/AuthProvider";
+
 
 
 const Register = () => {
+
+    const {createUser}=useContext(AuthContext)
+    
+
+
     const handleRegister = e =>{
         e.preventDefault();
         const name =e.target.name.value;
         const email =e.target.email.value;
         const password=e.target.password.value;
         console.log(name,email,password)
+
+        createUser(email,password)
+        .then(result=>{
+            console.log(result.user)
+        })
+        .catch(error=>{
+            console.log(error.message)
+        })
+
     }
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
